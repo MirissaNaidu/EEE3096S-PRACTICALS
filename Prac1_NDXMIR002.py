@@ -23,15 +23,14 @@ L0 = None                # bit displayed
 L1 = None                # bit displayed
 L2 = None                # bit displayed
 binary = None            # shows the integer number displayed on LED 
-current_number = 0    # binary 
 
 # Pin set-up
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)                                         # setup pins using board config
 
-GPIO.setup(7, GPIO.OUT, initial=GPIO.LOW)                    # sets initial condition to output low
-GPIO.setup(11, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(15, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(7, GPIO.OUT)                    # sets initial condition to output low
+GPIO.setup(11, GPIO.OUT)
+GPIO.setup(15, GPIO.OUT)
 """
 GPIO.setup(button_increase, GPIO.IN, pull_up_down = GPIO.PUD_UP)  # setup button using pull-up resistor
 GPIO.setup(button_decrease, GPIO.IN, pull_up_down = GPIO.PUD_UP)  # setup button using pull-up resistor
@@ -60,35 +59,32 @@ def displayLED(binary):
 		   setLED(0,0,0)
 
         if (binary == 1):
-                   setLED(0,0,0)
+                   setLED(0,0,1)
         
 	if (binary == 2):
-                   setLED(0,0,0)
+                   setLED(0,1,0)
         
  	if (binary == 3):
-                   setLED(0,0,0)
+                   setLED(0,1,1)
         
 	if (binary == 4):
-                   setLED(0,0,0)
+                   setLED(1,0,0)
         
 	if (binary == 5):
-                   setLED(0,0,0)
+                   setLED(1,0,1)
         
 	if (binary == 6):
-                   setLED(0,0,0)
+                   setLED(1,1,0)
         
 	if (binary == 7):
-                   setLED(0,0,0)
-
-
+                   setLED(1,1,1)
 
 
 def main():
-	for i in range(0, 8): 
- 	     current_number += i 
+	for current_number in range(0, 8): 
+ 	      
              displayLED(current_number);
-	     sleep(200);
-
+	     sleep(2);
 
 
 
@@ -105,7 +101,7 @@ if __name__ == "__main__":
         # Turn off your GPIOs here
         GPIO.cleanup()
 
-    except e:
+    except Exception as e:
         GPIO.cleanup()
         print("Some other error occurred")
         print(e.message)

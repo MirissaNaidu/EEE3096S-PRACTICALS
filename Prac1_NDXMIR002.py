@@ -18,7 +18,7 @@ L2 = None                # MSB bit displayed
 SW0 = None
 SW1 = None
 binary = None            # shows the integer number displayed on LED 
-
+current_number = 0
 
 # Pin set-up
 GPIO.setwarnings(False)
@@ -75,19 +75,21 @@ def displayLED(binary):
 	if (binary == 7):
                    setLED(1,1,1)
 
-
+       
 
 def main():
- 
+   
      input_state_1 = GPIO.input(18)
-     input_state_2 = GPIO.input(16)
-     current_number = 0
- 
-       
+     global current_number 
+         
      if input_state_1 == False:
-        print ('Button Pressed')
+ #       print ('Button Pressed')
         current_number += 1
-        print current_number
+  #      print current_number
+        if current_number>7:
+           current_number = 0
+        
+        displayLED(current_number)
         sleep(0.2)
 
 

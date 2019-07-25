@@ -11,30 +11,26 @@ import time
 from time import sleep
 
 # Define Variables
-"""
-global int LED_0 = 7;             # LSB pin 
-global int LED_1 = 11;
-global int LED_2 = 15;	     # MSB pin 	
 
-global int button_increase=16                     # BUTTON PIN CONFIGURATIONS
-global int button_decrease=18
-"""
-L0 = None                # bit displayed 
+L0 = None                # LSB displayed 
 L1 = None                # bit displayed
-L2 = None                # bit displayed
+L2 = None                # MSB bit displayed
+SW0 = None
+SW1 = None
 binary = None            # shows the integer number displayed on LED 
+
 
 # Pin set-up
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)                                         # setup pins using board config
 
-GPIO.setup(7, GPIO.OUT)                    # sets initial condition to output low
-GPIO.setup(11, GPIO.OUT)
-GPIO.setup(15, GPIO.OUT)
-"""
-GPIO.setup(button_increase, GPIO.IN, pull_up_down = GPIO.PUD_UP)  # setup button using pull-up resistor
-GPIO.setup(button_decrease, GPIO.IN, pull_up_down = GPIO.PUD_UP)  # setup button using pull-up resistor
-"""
+GPIO.setup(7, GPIO.OUT, initial = GPIO.LOW)                    # sets initial condition to output low
+GPIO.setup(11, GPIO.OUT,initial = GPIO.LOW)
+GPIO.setup(15, GPIO.OUT,initial = GPIO.LOW)
+
+GPIO.setup(16, GPIO.IN, pull_up_down = GPIO.PUD_UP)  # setup button using pull-down resistor
+GPIO.setup(18, GPIO.IN, pull_up_down = GPIO.PUD_UP)  # setup button using pull-down resistor
+
 
 def setLED(L2, L1, L0):
 	
@@ -80,12 +76,19 @@ def displayLED(binary):
                    setLED(1,1,1)
 
 
-def main():
-	for current_number in range(0, 8): 
- 	      
-             displayLED(current_number);
-	     sleep(2);
 
+def main():
+ 
+     input_state_1 = GPIO.input(18)
+     input_state_2 = GPIO.input(16)
+     current_number = 0
+ 
+       
+     if input_state_1 == False:
+        print ('Button Pressed')
+        current_number += 1
+        print current_number
+        sleep(0.2)
 
 
 # Only run the functions if

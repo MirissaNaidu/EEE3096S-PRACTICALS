@@ -80,19 +80,32 @@ def displayLED(binary):
 def main():
    
      input_state_1 = GPIO.input(18)
+     input_state_2 = GPIO.input(16)    
      global current_number 
          
      if input_state_1 == False:
- #       print ('Button Pressed')
         current_number += 1
-  #      print current_number
+
         if current_number>7:
            current_number = 0
         
         displayLED(current_number)
         sleep(0.2)
+ 
+     if input_state_2 == False: 
+         print ('Button Pressed')
+         current_number = current_number - 1
+ 
+         if current_number < 0:
+            current_number = 7
+  
+         displayLED(current_number)
+         sleep(0.2)
 
 
+
+
+ 
 # Only run the functions if
 if __name__ == "__main__":
 

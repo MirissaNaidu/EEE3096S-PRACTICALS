@@ -87,12 +87,18 @@ def main():
 
 	if GPIO.input(18) == False:
 		current_number += 1
+		if current_number > 7:
+			current_number = 0
+
 		displayLED(current_number)
 		sleep(0.2)
 
 
 	if GPIO.input(16) == False:
 		current_number -= 1
+		if current_number < 0:
+			current_number = 7
+
 		displayLED(current_number)
 		sleep(0.2)
 

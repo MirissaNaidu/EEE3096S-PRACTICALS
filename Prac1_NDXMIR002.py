@@ -33,11 +33,52 @@ GPIO.setup(16, GPIO.IN, pull_up_down = GPIO.PUD_UP)  # setup button on pin 16 us
 GPIO.setup(18, GPIO.IN, pull_up_down = GPIO.PUD_UP)  # setup button on pin 18 using pull-down resistor
 
 
+# Function that sets the value of the LED to HIGH or LOW
 
+def setLED(L2, L1, L0):
 
+        if (L0 == 0):
+                GPIO.output(7, GPIO.LOW)
+        else:
+                GPIO.output(7, GPIO.HIGH)
 
+        if (L1 == 0):
+                GPIO.output(11, GPIO.LOW)
+        else:
+                GPIO.output(11, GPIO.HIGH)
 
+        if (L2 == 0):
+                GPIO.output(15, GPIO.LOW)
+        else:
+                GPIO.output(15, GPIO.HIGH)
 
+# Function that sets LED output to a integer value
+
+def displayLED(binary):
+
+        if (binary == 0):
+                   setLED(0,0,0)
+
+        if (binary == 1):
+                   setLED(0,0,1)
+
+        if (binary == 2):
+                   setLED(0,1,0)
+
+        if (binary == 3):
+                   setLED(0,1,1)
+
+        if (binary == 4):
+                   setLED(1,0,0)
+
+        if (binary == 5):
+                   setLED(1,0,1)
+
+        if (binary == 6):
+                   setLED(1,1,0)
+
+        if (binary == 7):
+                   setLED(1,1,1)
 
 
 def main():

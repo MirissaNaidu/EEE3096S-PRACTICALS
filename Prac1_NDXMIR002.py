@@ -20,7 +20,6 @@ SW0 = None
 SW1 = None
 binary = None            # shows the integer number to be displayed on LED 
 current_number = 0
-
 # GPIO configuration/Pin set-up
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)                                         # setup pins using board config
@@ -80,28 +79,22 @@ def displayLED(binary):
         if (binary == 7):
                    setLED(1,1,1)
 
+def increase():
+	
+        global current_number
+	current_number += 1
+	if current_number > 7 :
+	   current_number = 0
+       
+        displayLED(current_number)
 
 def main():
 
-	global current_number
-
-	if GPIO.input(18) == False:
-		current_number += 1
-		if current_number > 7:
-			current_number = 0
-
-		displayLED(current_number)
-		sleep(0.2)
-
-
-	if GPIO.input(16) == False:
-		current_number -= 1
-		if current_number < 0:
-			current_number = 7
-
-		displayLED(current_number)
-		sleep(0.2)
-
+	while True:
+	      if not 'event' in locals():
+		event = GPIO.add_event_detect(18, GPIO.FALLING, callback = lambda x: increase(), bouncetime = 300)
+	      else:
+		sleep(0.4)
 
 
 

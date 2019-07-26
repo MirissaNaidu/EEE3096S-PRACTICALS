@@ -83,26 +83,23 @@ def displayLED(binary):
 
 def main():
 
-	if GPIO.input(18) == False:
+	global current_number
 
-		GPIO.output(7, GPIO.HIGH)
+	if GPIO.input(18) == False:
+		current_number += 1
+		displayLED(current_number)
 		sleep(0.2)
 
 
 	if GPIO.input(16) == False:
-
-		GPIO.output(7, GPIO.LOW)
+		current_number -= 1
+		displayLED(current_number)
 		sleep(0.2)
 
 
 
 
 
-
-
-
-
- 
 # Only run the functions if
 if __name__ == "__main__":
 
